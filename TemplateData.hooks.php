@@ -14,7 +14,7 @@ class TemplateDataHooks {
 	/**
 	 * Register parser hooks
 	 */
-	public static function onParserFirstCallInit( &$parser ) {
+	public static function onParserFirstCallInit( $parser ) {
 		$parser->setHook( 'templatedata', array( 'TemplateDataHooks', 'render' ) );
 		return true;
 	}
@@ -33,7 +33,7 @@ class TemplateDataHooks {
 	 */
 	public static function onResourceLoaderTestModules(
 		array &$testModules,
-		ResourceLoader &$resourceLoader
+		ResourceLoader $resourceLoader
 	) {
 		$testModules['qunit']['ext.templateData.test'] = array(
 			'scripts' => array( 'tests/ext.templateData.tests.js' ),
@@ -51,7 +51,7 @@ class TemplateDataHooks {
 	 * @param ResourceLoader $resourceLoader
 	 * @return boolean true
 	 */
-	public static function onResourceLoaderRegisterModules( ResourceLoader &$resourceLoader ) {
+	public static function onResourceLoaderRegisterModules( ResourceLoader $resourceLoader ) {
 		$resourceModules = $resourceLoader->getConfig()->get( 'ResourceModules' );
 		$name = 'jquery.uls.data';
 		if ( !isset( $resourceModules[$name] ) && !$resourceLoader->isModuleRegistered( $name ) ) {
@@ -80,7 +80,7 @@ class TemplateDataHooks {
 	 * @param &$flags
 	 * @param Status &$status
 	 */
-	public static function onPageContentSave( &$page, &$user, &$content, &$summary, $minor,
+	public static function onPageContentSave( $page, $user, $content, &$summary, $minor,
 		$watchthis, $sectionanchor, &$flags, &$status
 	) {
 
